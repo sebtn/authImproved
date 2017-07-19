@@ -3,23 +3,18 @@ import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
 import {Link, hashHistory} from 'react-router'
 
-import {signinUser} from '../../actions/index'
+import {signinUser} from '../../actions'
 
-class FormAuth extends Component {
-  static contextTypes = {
-    router: PropTypes.object
+class Signin extends Component {
+/*----------------------------------------------------------*/
+  handleFormSubmit = ({email, password}) => {
+    signinUser({email, password})
   }
-  /*----------------------------------------------------------*/
-  handleFormSubmit = (props) => {
-    signinUser(props)
-  }
-
   render() {
     const { handleSubmit, 
-      pristine, 
-      reset, 
       submitting, 
-      onSubmit } = this.props    
+      onSubmit, 
+      } = this.props    
     return (
       <div className="wraper-container">
         <div className="form-container">
@@ -100,4 +95,4 @@ const renderInput  = ({
 export default reduxForm({
   form: 'Auth',
   validate
-}, null, { signinUser } )(FormAuth)
+}, null, { signinUser } )(Signin)
