@@ -3,13 +3,27 @@ import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
 import {Link, hashHistory} from 'react-router'
 
- class FormAuth extends Component {
+import {signinUser} from '../../actions/index'
+
+class FormAuth extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  }
+  /*----------------------------------------------------------*/
+  handleFormSubmit = (props) => {
+    signinUser(props)
+  }
+
   render() {
-    const { handleSubmit, pristine, reset, submitting, onSubmit } = this.props    
+    const { handleSubmit, 
+      pristine, 
+      reset, 
+      submitting, 
+      onSubmit } = this.props    
     return (
       <div className="wraper-container">
         <div className="form-container">
-          <form action="">
+          <form onSubmit={ handleSubmit( this.handleFormSubmit ) }>
             <div >
               <label>Email</label>
               <Field
@@ -28,8 +42,14 @@ import {Link, hashHistory} from 'react-router'
                 type="text"
                 />                     
             </div>
-            <button type="submit" className="btn btn-primary" >Submit</button>
-            <Link to="/" className="btn btn-link b1-button">Cancel</Link>
+            <button type="submit" 
+              className="btn btn-primary">
+              Submit
+            </button>
+            <Link to="/" 
+              className="btn btn-link b1-button">
+              Cancel
+            </Link>
           </form>
         </div>
       </div>
@@ -63,23 +83,21 @@ const renderInput  = ({
       type={type} />
   </div>
 )
+
 /*---------------------------------------------------------------------*/
   const validate = values => {
     const errors = {}
-    if (!values.title) {
-      errors.title = 'Required'
+    if (!values.email) {
+      errors.email = 'Required'
     }
-    if (!values.categories) { 
-      errors.categories = 'Required' 
+    if (!values.password) { 
+      errors.password = 'Required' 
     }     
-    if (!values.content) { 
-      errors.content = 'Required' 
-    } 
     return errors
   }
 
 /*---------------------------------------------------------------------*/
 export default reduxForm({
-  form: 'FormAuth',
+  form: 'Auth',
   validate
-}, null )(FormAuth)
+}, null, { signinUser } )(FormAuth)

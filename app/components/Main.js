@@ -8,8 +8,8 @@ class Main extends Component {
   render() {
     return (
       <div>
+        <h3 className="title">you can always see me</h3>
         <Header />
-          <h1 className="title">Hi from Main no hook yet!</h1>
          {this.props.children}
       </div>
     )
