@@ -1,24 +1,26 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
-import {Link, hashHistory} from 'react-router'
+import {Link} from 'react-router'
 
 import {signinUser} from '../../actions'
 
 class Signin extends Component {
 /*----------------------------------------------------------*/
   handleFormSubmit = ({email, password}) => {
-    signinUser({email, password})
+    return signinUser({email, password})
   }
+
   render() {
     const { handleSubmit, 
       submitting, 
       onSubmit, 
+      submit,
       } = this.props    
     return (
       <div className="wraper-container">
         <div className="form-container">
-          <form onSubmit={ handleSubmit( this.handleFormSubmit ) }>
+          <form onSubmit={ handleSubmit(this.handleFormSubmit)}>
             <div >
               <label>Email</label>
               <Field
