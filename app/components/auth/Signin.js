@@ -36,7 +36,7 @@ class Signin extends Component {
       <div className="wraper-container">
         <div className="form-container">
           <form onSubmit={ handleSubmit(this.handleFormSubmit)}>
-            <div >
+            <div className="input-wrapper">
               <label>Email</label>
               <Field
                 name="email"                  
@@ -45,7 +45,7 @@ class Signin extends Component {
                 type="text"
                 />                     
             </div> 
-            <div >
+            <div className="input-wrapper">
               <label>Password</label>
               <Field
                 name="password"                  
@@ -58,11 +58,11 @@ class Signin extends Component {
             <div>{this.renderAlert()}</div>
             </div>
             <button type="submit" 
-              className="btn btn-primary">
+              className="btn btn-primary button">
               Submit
             </button>
             <Link to="/" 
-              className="btn btn-link b1-button">
+              className="btn btn-link button">
               Cancel
             </Link>
           </form>
@@ -82,7 +82,7 @@ const renderInput  = ({
   meta: { touched, error }
 }) => (
   <div>
-    <div>
+    <div className="alert-wrapper">
       { touched &&
         (( error &&      
           <strong className="alert alert-danger" 

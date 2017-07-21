@@ -10,7 +10,8 @@ import {connect} from 'react-redux'
     if(this.props.authenticated) {
       return(
         <li className="nav-item">
-          <Link to='/signout'>
+          <Link to='/signout'
+            className="btn btn-link">
             sign out
           </Link>
         </li>
@@ -18,12 +19,14 @@ import {connect} from 'react-redux'
     } else {
       return[
         <li className="nav-item" key={1}>
-          <Link to='/signin'>
+          <Link to='/signin'
+            className="btn btn-link">
             sign in
           </Link>
         </li>,
         <li className="nav-item" key={2}>
-          <Link to='/signup'>
+          <Link to='/signup'
+            className="btn btn-link">
             sign up
           </Link>
         </li>
