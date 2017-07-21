@@ -6,19 +6,23 @@
 │   ├── components
 │   │   ├── auth
 │   │   │   └── Signin.js
+│   │   ├── Feature.js
 │   │   ├── Header.js
 │   │   └── Main.js
 │   ├── reducers
+│   │   ├── authReducer.js
 │   │   └── index.js
 │   ├── router
 │   │   └── index.js
-│   ├── store
-│   │   └── configureStore.js
 │   ├── styles
 │   │   ├── app.scss
-│   │   └── base
-│   │       ├── _core.scss
-│   │       └── _variables.scss
+│   │   ├── base
+│   │   │   ├── _core.scss
+│   │   │   └── _variables.scss
+│   │   └── components
+│   │       ├── Header.scss
+│   │       ├── Main.scss
+│   │       └── Signin.scss
 │   └── tests
 │       └── components
 │           └── test_index.js
@@ -32,4 +36,4 @@
 ├── server.js
 └── webpack.config.js
 
-12 directories, 20 files
+12 directories, 24 files
