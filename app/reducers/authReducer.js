@@ -5,7 +5,7 @@ export let authReducer = ( state = {}, action ) => {
     case "NON_AUTH_USER":
       return {  ...state, authenticated: false }     
       case "AUTH_ERROR":
-      return {  ...state, error: payload.error } 
+      return {  ...state, error: action.payload } 
     default:
       return state      
   }

@@ -13,6 +13,17 @@ class Signin extends Component {
 
   }
 
+/*----------------------------------------------------------*/
+  renderAlert = () => {
+    if(this.props.errorMessage) {
+      return (
+        <strong className="alert alert-danger" 
+          role="alert">
+          <span>no good!{this.props.errorMessage}</span>
+        </strong> 
+      )
+    }
+  }
 
 /*----------------------------------------------------------*/
   render() {
@@ -40,8 +51,11 @@ class Signin extends Component {
                 name="password"                  
                 placeholder="Type a valid password"
                 component={renderInput}         
-                type="text"
+                type="password"
                 />                     
+            </div>
+            <div>
+            <div>{this.renderAlert()}</div>
             </div>
             <button type="submit" 
               className="btn btn-primary">
@@ -101,7 +115,7 @@ const renderInput  = ({
   // this relates to the main reducer
   function mapStateToProps (state) {
     return { 
-      errorMesssage: state.auth.props 
+      errorMessage: state.auth.props
     }
   }
 

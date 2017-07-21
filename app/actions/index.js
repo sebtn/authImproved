@@ -11,21 +11,35 @@ export let login = (email, password) => {
 }
 
 /*--------------------------------------------------------------*/
+export let authError = (err) => {
+  return {
+    type: "AUTH_ERROR",
+    payload: err
+  }
+}
+
+/*--------------------------------------------------------------*/
+/*Async validation*/
 export let signinUser = (values, dispatch, props) => { 
 // combination redux form and redux thunk made 
 // separate refs to props and values
   const postUrl = 'http://localhost:3090'
   return axios.post(`${postUrl}/signin`, values)
     .then(res => {
-      if(res.data.errors) { 
-        throw new SubmissionError(response.data.errors)
+      if(res.data.error) { 
+        throw new SubmissionError(res.data.error)
       }
       dispatch( login() ) 
       localStorage.setItem('token', res.data.token)
       hashHistory.push('/feature')
     })
-    .catch(errors =>  {
-      console.log('signup error', errors)
-      throw new SubmissionError(errors.errors || { _error: 'Sign up failed!!' })
+    .catch((error) =>  {
+      if(error.validationErrors) {
+        console.log('signup error', error)
+        throw new SubmissionError(error.validationErrors)        
+      } else {
+        dispatch( authError('See me? oops bad login info') )
+        console.log('Other communication error')
+      }
     })
 }
