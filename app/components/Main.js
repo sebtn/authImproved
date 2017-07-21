@@ -10,7 +10,7 @@ class Main extends Component {
       <div>
         <h3 className="title">you can always see me</h3>
         <Header />
-         {this.props.children}
+        {this.props.children}
       </div>
     )
   }

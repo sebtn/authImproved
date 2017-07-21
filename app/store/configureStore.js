@@ -1,18 +1,19 @@
-// import {} from  './../reducers/index'
-let redux = require('redux')
+import {createStore, applyMiddleware, compose} from 'redux'
+import thunk from 'redux-thunk'
+import rootReducer from '../reducers/index'
 
-export let configure = () => { 
-/*------------------------------------------------------*/
-	/*Combine reducers*/
-	let reducer = redux.combineReducers({
-
-	})
+export let configure = ( initialState = {} ) => { 
 
 /*------------------------------------------------------*/
 	/*Middleware = add arg redux.compose*/
- let store = redux.createStore(reducer, redux.compose(
-		window.devToolsExtension ? window.devToolsExtension() : f => f 
-	))
 
+  // const createMiddleware = applyMiddleware(thunk)(createStore)
+  // const devExtension = compose(window.devToolsExtension ? window.devToolsExtension() : f => f )
+  let store = createStore(rootReducer, initialState,
+    compose(applyMiddleware(thunk),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  ))
 	return store
 }
+
+// let store = require('./store/configureStore').configure()

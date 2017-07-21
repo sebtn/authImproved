@@ -1,38 +1,31 @@
 import axios from 'axios'
+import {hashHistory, SubmissionError} from 'react-router'
 
-let login = ({email, password}) => {
+/*--------------------------------------------------------------*/
+export let login = (email, password) => {
   return {
     type: "AUTH_USER",
     email,
-    password
+    password,
   }
 }
 
-export let signinUser = ({email, password}) => {
-// export let signinUser = (props) => {
-  // submit email/pw to server
-  // if rq good -> 
-  // udpate state auth user
-  // save jwt token so req can be followup
-  // redirect '/feature'
-  // if (err) {return console.log(err)}
-  // debugger
-    const postUrl = 'http://localhost:3090'
-    let request = axios.post(`${postUrl}/signin`, {email, password})
-    return (dispatch) => {
-      return dispatch( login(email, password) )
-        .then( res  => {
-          console.log('after res processeing here: ' , res)
-          // hashHistory.push('/feature')
-        })
-        .catch( error => {
-          console.log(error)
-          console.log('FAILED!!!')
-        })
-  }
-  // return {
-  //   type: "AUTH_USER",
-  //   payload: request
-  // }
-
+/*--------------------------------------------------------------*/
+export let signinUser = (values, dispatch, props) => { 
+// combination redux form and redux thunk made 
+// separate refs to props and values
+  const postUrl = 'http://localhost:3090'
+  return axios.post(`${postUrl}/signin`, values)
+    .then(res => {
+      if(res.data.errors) { 
+        throw new SubmissionError(response.data.errors)
+      }
+      dispatch( login() ) 
+      localStorage.setItem('token', res.data.token)
+      hashHistory.push('/feature')
+    })
+    .catch(errors =>  {
+      console.log('signup error', errors)
+      throw new SubmissionError(errors.errors || { _error: 'Sign up failed!!' })
+    })
 }

@@ -1,21 +1,25 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
-import {Link} from 'react-router'
+import {Link, SubmissionError} from 'react-router'
 
 import {signinUser} from '../../actions'
 
 class Signin extends Component {
+
 /*----------------------------------------------------------*/
-  handleFormSubmit = ({email, password}) => {
-    return signinUser({email, password})
+  handleFormSubmit = (email, password) => {
+    return signinUser(email, password)
+
   }
 
+
+/*----------------------------------------------------------*/
   render() {
     const { handleSubmit, 
       submitting, 
       onSubmit, 
-      submit,
+      submit
       } = this.props    
     return (
       <div className="wraper-container">
@@ -94,7 +98,16 @@ const renderInput  = ({
   }
 
 /*---------------------------------------------------------------------*/
+  // this relates to the main reducer
+  function mapStateToProps (state) {
+    return { 
+      errorMesssage: state.auth.props 
+    }
+  }
+
+/*---------------------------------------------------------------------*/
 export default reduxForm({
-  form: 'Auth',
-  validate
-}, null, { signinUser } )(Signin)
+  form: 'Signin',
+  validate,
+  onSubmit: signinUser // combination redux form and redux thunk the ref is moved
+}, mapStateToProps)(Signin)
