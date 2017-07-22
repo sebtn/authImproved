@@ -10,7 +10,6 @@ class Signin extends Component {
 /*----------------------------------------------------------*/
   handleFormSubmit = (email, password) => {
     return signinUser(email, password)
-
   }
 
 /*----------------------------------------------------------*/

@@ -43,7 +43,7 @@ export let signinUser = (values, dispatch, props) => {
     })
     .catch((error) =>  {
       if(error.validationErrors) {
-        console.log('signup error', error)
+        console.log('sign-in error', error)
         throw new SubmissionError(error.validationErrors)        
       } else {
         dispatch( authError('See me? oops bad login info') )
@@ -63,17 +63,14 @@ export let signupUser = (values, dispatch, props) => {
       if(res.data.error) { 
         throw new SubmissionError(res.data.error)
       }
-      // dispatch( signin() ) 
-      // localStorage.setItem('token', res.data.token)
-      // hashHistory.push('/feature')
+      dispatch( login() ) 
+      localStorage.setItem('token', res.data.token)
+      hashHistory.push('/feature')
     })
     .catch((error) =>  {
       if(error.validationErrors) {
-        console.log('signup error', error)
+        console.log('sign-up error', error)
         throw new SubmissionError(error.validationErrors)        
-      } else {
-        dispatch( authError('See me? oops bad login info') )
-        console.log('Other communication error')
-      }
+      } 
     })
 }

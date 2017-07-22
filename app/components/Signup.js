@@ -9,9 +9,20 @@ import {signupUser} from '../actions/index'
 class Signup extends Component {
 
 /*----------------------------------------------------------*/
-  handleFormSubmit = (props) => {
-    return signupUser(props)
+  handleFormSubmit = (email, password) => {
+    return signupUser(email, password)
+  }
 
+/*----------------------------------------------------------*/
+  renderAlert = () => {
+    if(this.props.errorMessage) {
+      return (
+        <strong className="alert alert-danger" 
+          role="alert">
+          <span>no good!{this.props.errorMessage}</span>
+        </strong> 
+      )
+    }
   }
 
 /*----------------------------------------------------------*/
@@ -53,6 +64,7 @@ render() {
                 />                     
             </div>
             <div>
+              {this.renderAlert()}
             </div>
             <button type="submit" 
               className="btn btn-primary button">
@@ -112,9 +124,17 @@ const renderInput  = ({
     return errors
   }
 
+/*---------------------------------------------------------------------*/
+  // this relates to the main reducer
+  function mapStateToProps (state) {
+    return { 
+      errorMessage: state.auth.props
+    }
+  }
+
 
 export default reduxForm({
   form: 'Signup', 
   validate, 
   onSubmit: signupUser
-})(Signup)
+}, mapStateToProps)(Signup)
