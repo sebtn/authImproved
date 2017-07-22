@@ -17,6 +17,14 @@ export let authError = (err) => {
     payload: err
   }
 }
+/*--------------------------------------------------------------*/
+export let signOut = (authenticated) => {
+  localStorage.removeItem('token')
+  return {
+    type: "NON_AUTH_ERROR",
+    authenticated: !authenticated
+  }
+}
 
 /*--------------------------------------------------------------*/
 /*Async validation*/

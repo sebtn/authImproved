@@ -7,7 +7,8 @@ import {connect} from 'react-redux'
   
 /*----------------------------------------------------*/
   renderLinks = () => {
-    if(this.props.authenticated) {
+    const {authenticated} = this.props
+    if(authenticated) {
       return(
         <li className="nav-item">
           <Link to='/signout'
@@ -16,7 +17,7 @@ import {connect} from 'react-redux'
           </Link>
         </li>
       )
-    } else {
+    } else  {
       return[
         <li className="nav-item" key={1}>
           <Link to='/signin'
@@ -38,10 +39,7 @@ import {connect} from 'react-redux'
   render() {
     return (
       <div className="nav-container">
-        <nav>
-          <li className="nav-item">
-            Redux Auth
-          </li>          
+        <nav>       
           {this.renderLinks()}
         </nav>
       </div>

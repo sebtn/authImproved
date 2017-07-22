@@ -3,30 +3,18 @@ import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
 import {Link, SubmissionError} from 'react-router'
 
-import {signinUser} from '../../actions'      
 
-class Signin extends Component {
+
+class Signup extends Component {
 
 /*----------------------------------------------------------*/
   handleFormSubmit = (email, password) => {
-    return signinUser(email, password)
+    // return signupUser(email, password)
 
   }
 
 /*----------------------------------------------------------*/
-  renderAlert = () => {
-    if(this.props.errorMessage) {
-      return (
-        <strong className="alert alert-danger" 
-          role="alert">
-          <span>no good!{this.props.errorMessage}</span>
-        </strong> 
-      )
-    }
-  }
-
-/*----------------------------------------------------------*/
-  render() {
+render() {
     const { handleSubmit, 
       submitting, 
       onSubmit, 
@@ -53,13 +41,21 @@ class Signin extends Component {
                 component={renderInput}         
                 type="password"
                 />                     
+            </div>            
+            <div className="input-wrapper">
+              <label>Confirm Password</label>
+              <Field
+                name="password"                  
+                placeholder="Type a valid password"
+                component={renderInput}         
+                type="password"
+                />                     
             </div>
             <div>
-            <div>{this.renderAlert()}</div>
             </div>
             <button type="submit" 
               className="btn btn-primary button">
-              Submit
+              Sign-Up
             </button>
             <Link to="/" 
               className="btn btn-link button">
@@ -111,17 +107,8 @@ const renderInput  = ({
     return errors
   }
 
-/*---------------------------------------------------------------------*/
-  // this relates to the main reducer
-  function mapStateToProps (state) {
-    return { 
-      errorMessage: state.auth.props
-    }
-  }
 
-/*---------------------------------------------------------------------*/
 export default reduxForm({
-  form: 'Signin',
-  validate,
-  onSubmit: signinUser // combination redux form and redux thunk the ref is moved
-}, mapStateToProps)(Signin)
+  form: 'signup', 
+  validate
+})(Signup)

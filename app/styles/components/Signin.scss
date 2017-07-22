@@ -1,12 +1,20 @@
 input{
   width:100%;
-  margin: 0.75rem 0;
+  margin: 0;
+  padding:0;
+}
+label {
+  font-weight: bold;
+  margin-top: 0.5rem;
 }
 .input-wrapper {
   margin: 0 0.75rem;
 }
 .button {
-  margin: 0.5rem;
+  margin: 1rem;
   border-radius: 0;
   font-weight: bold;
+}
+.alert-wrapper {
+  margin-bottom: 1rem;
 }

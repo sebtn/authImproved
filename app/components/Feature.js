@@ -1,7 +1,16 @@
-import React from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+      
 
-export const Feature  = () => (
-  <div>
-    <h1>HI this is feature</h1>
-  </div>
-)
+class Feature extends Component {
+  render() {
+    return (
+      <div className="feature-container">
+        <h3 className="title-feature">I'm feature</h3>
+      </div>
+    )
+  }
+}
+
+export default connect()(Feature)
