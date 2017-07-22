@@ -3,13 +3,14 @@ import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
 import {Link, SubmissionError} from 'react-router'
 
+import {signupUser} from '../actions/index'      
 
 
 class Signup extends Component {
 
 /*----------------------------------------------------------*/
-  handleFormSubmit = (email, password) => {
-    // return signupUser(email, password)
+  handleFormSubmit = (props) => {
+    return signupUser(props)
 
   }
 
@@ -45,7 +46,7 @@ render() {
             <div className="input-wrapper">
               <label>Confirm Password</label>
               <Field
-                name="password"                  
+                name="confirm"                  
                 placeholder="Type a valid password"
                 component={renderInput}         
                 type="password"
@@ -101,14 +102,19 @@ const renderInput  = ({
     if (!values.email) {
       errors.email = 'Required'
     }
-    if (!values.password) { 
+    if (!values.password ) { 
       errors.password = 'Required' 
+    }     
+    if (values.password !== values.confirm ) { 
+      errors.password = "Password and confirm don't match"
+      errors.confirm  = "Password and confirm don't match" 
     }     
     return errors
   }
 
 
 export default reduxForm({
-  form: 'signup', 
-  validate
+  form: 'Signup', 
+  validate, 
+  onSubmit: signupUser
 })(Signup)
