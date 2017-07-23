@@ -1,5 +1,6 @@
 import axios from 'axios'
-import {hashHistory, SubmissionError} from 'react-router'
+import {hashHistory} from 'react-router'
+import { SubmissionError } from 'redux-form'
 
 /*--------------------------------------------------------------*/
 export let login = (email, password) => {
@@ -11,18 +12,19 @@ export let login = (email, password) => {
 }
 
 /*--------------------------------------------------------------*/
-export let authError = (err) => {
+export let authError = (error) => {
   return {
     type: "AUTH_ERROR",
-    payload: err
+    payload: error
   }
 }
+
 /*--------------------------------------------------------------*/
 export let signOut = (authenticated) => {
   localStorage.removeItem('token')
   return {
-    type: "NON_AUTH_ERROR",
-    authenticated: !authenticated
+    type: "NON_AUTH_USER",
+    payload: false
   }
 }
 
@@ -67,10 +69,12 @@ export let signupUser = (values, dispatch, props) => {
       localStorage.setItem('token', res.data.token)
       hashHistory.push('/feature')
     })
-    .catch((error) =>  {
-      if(error.validationErrors) {
-        console.log('sign-up error', error)
-        throw new SubmissionError(error.validationErrors)        
-      } 
+    .catch(res =>  {
+      // if(error.validationErrors) {
+      //   console.log('sign-up error', error)
+      //   throw new SubmissionError(error.validationErrors)        
+      // } 
+        dispatch( authError(res.error) )
+        // console.log('Other communication error')
     })
 }

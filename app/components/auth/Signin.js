@@ -114,7 +114,7 @@ const renderInput  = ({
   // this relates to the main reducer
   function mapStateToProps (state) {
     return { 
-      errorMessage: state.auth.props
+      errorMessage: state.auth.error
     }
   }
 

@@ -1,15 +1,24 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import { hashHistory} from 'react-router'
+
 
 import {signOut} from '../actions/index'
 
 import Header from './Header'
 
 class Signout extends Component {
+/*---------------------------------------------------------*/
+
+  componentWillUpdate = (nextProps) => {
+    if(!nextProps.authenticated) {
+      return hashHistory.push('/')
+    }
+  }
 
   componentWillMount = () => {
-   this.props.signOut()
+   return this.props.signOut()
   }
 
 /*---------------------------------------------------------*/
@@ -22,4 +31,11 @@ class Signout extends Component {
   }
 }
 
-export default connect(null, {signOut})(Signout)
+/*---------------------------------------------------------*/
+let  mapStateToProps = (state) => {
+  return {
+    authenticated: state.auth.authenticated 
+  }
+}
+
+export default connect(mapStateToProps, {signOut})(Signout)

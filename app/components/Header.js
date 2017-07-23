@@ -48,7 +48,7 @@ import {connect} from 'react-redux'
 }
 
 /*------------------------------------------------*/
-function mapStateToProps (state) {
+let  mapStateToProps = (state) => {
   return {
     authenticated: state.auth.authenticated 
   }
