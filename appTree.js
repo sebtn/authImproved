@@ -9,8 +9,10 @@
 │   │   ├── Feature.js
 │   │   ├── Header.js
 │   │   ├── Main.js
+│   │   ├── RequireAuth.js
 │   │   ├── Signout.js
-│   │   └── Signup.js
+│   │   ├── Signup.js
+│   │   └── Welcome.js
 │   ├── reducers
 │   │   ├── authReducer.js
 │   │   └── index.js
@@ -38,4 +40,4 @@
 ├── server.js
 └── webpack.config.js
 
-12 directories, 26 files
+12 directories, 28 files
