@@ -4,8 +4,10 @@ export let authReducer = ( state = {}, action ) => {
       return {  ...state, error: '', authenticated: true } 
     case "NON_AUTH_USER":
       return {  ...state, authenticated: false }     
-      case "AUTH_ERROR":
+    case "AUTH_ERROR":
       return {  ...state, error: action.payload } 
+    case "FETCH_MESSAGE":
+      return { ...state, message: action.payload }
     default:
       return state      
   }

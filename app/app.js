@@ -11,11 +11,17 @@ import router from './router/index'
 
 const createMiddleware = applyMiddleware(thunk)(createStore)
 const devExtension = compose(window.devToolsExtension ? window.devToolsExtension() : f => f )
+const  store =  createMiddleware(reducers, devExtension)
+const token = localStorage.getItem('token')
+
+if (token) {
+  store.dispatch({ type: "AUTH_USER" })
+}
 
 'use strict'
 
 ReactDOM.render(
-  <Provider store={ createMiddleware(reducers, devExtension) }>
+  <Provider store={store}>
     {router} 
   </Provider>
 ,document.getElementById('root'))

@@ -29,7 +29,30 @@ export let signOut = (authenticated) => {
 }
 
 /*--------------------------------------------------------------*/
-/*Async validation*/
+export let fetchMsg = (message) => {
+  return {
+    type: "FETCH_MESSAGE",
+    payload: message
+  }
+}
+
+/*--------------------------------------------------------------*/
+/*Async fetch*/
+export let fetchMessage = () => {
+  const baseUrl = 'http://localhost:3090'
+  return (dispatch) => {
+    axios.get(`${baseUrl}`, {
+      headers: {authorization: localStorage.getItem('token') }
+    })
+    .then(res => {
+      dispatch({type: "FETCH_MESSAGE", payload: res.data.message})
+      // console.log(res)
+    })
+  }
+}
+
+/*--------------------------------------------------------------*/
+/*Async post user*/
 export let signinUser = (values, dispatch, props) => { 
 // combination redux form and redux thunk made 
 // separate refs to props and values
