@@ -11,7 +11,7 @@ import router from './router/index'
 
 const createMiddleware = applyMiddleware(thunk)(createStore)
 const devExtension = compose(window.devToolsExtension ? window.devToolsExtension() : f => f )
-const  store =  createMiddleware(reducers, devExtension)
+const store =  createMiddleware(reducers, devExtension)
 const token = localStorage.getItem('token')
 
 if (token) {
@@ -19,7 +19,6 @@ if (token) {
 }
 
 'use strict'
-
 ReactDOM.render(
   <Provider store={store}>
     {router} 

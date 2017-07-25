@@ -112,10 +112,10 @@ const renderInput  = ({
   const validate = values => {
     const errors = {}
     if (!values.email) {
-      errors.email = 'Required'
+      errors.email = 'Field Required'
     }
     if (!values.password ) { 
-      errors.password = 'Required' 
+      errors.password = 'Field Required' 
     }     
     if (values.password !== values.confirm ) { 
       errors.password = "Password and confirm don't match"
@@ -132,7 +132,7 @@ const renderInput  = ({
     }
   }
 
-
+/*---------------------------------------------------------------------*/
 export default reduxForm({
   form: 'Signup', 
   validate, 

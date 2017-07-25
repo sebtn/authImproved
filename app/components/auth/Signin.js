@@ -102,21 +102,21 @@ const renderInput  = ({
   const validate = values => {
     const errors = {}
     if (!values.email) {
-      errors.email = 'Required'
+      errors.email = 'Field Required'
     }
     if (!values.password) { 
-      errors.password = 'Required' 
+      errors.password = 'Field Required' 
     }     
     return errors
   }
 
 /*---------------------------------------------------------------------*/
-  // this relates to the main reducer
-  function mapStateToProps (state) {
-    return { 
-      errorMessage: state.auth.error
-    }
+// this relates to the main reducer
+let mapStateToProps = (state) => {
+  return { 
+    errorMessage: state.auth.error
   }
+}
 
 /*---------------------------------------------------------------------*/
 export default reduxForm({
