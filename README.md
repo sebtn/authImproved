@@ -1,9 +1,9 @@
-### Redux, React and Karma boiler plate 
+### Redux, React auth
 -----
-+ Uses webpack and express to serve devEnv
-+ Node js and react for UI designing
++ Uses webpack and express as devEnv
++ Uses Node and react
++ For UI design projects
 + Bootstrapped for components styling 
-+ Redux boiler plate
 + Karma installed and optimized for fast unit testing  
 
 `` Author = () => { Sebtn } ``
